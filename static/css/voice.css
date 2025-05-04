@@ -1,0 +1,145 @@
+/* Voice Page Specific Styles */
+
+.voice-container {
+    justify-content: center; /* Center card vertically */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.voice-card {
+    max-width: 28rem; /* max-w-md */
+    text-align: center;
+}
+
+.voice-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; /* space-y-6 */
+    padding-top: 1.5rem !important; /* Override potential pt-0 from home.css */
+}
+
+.voice-instructions {
+    color: var(--muted-foreground);
+    font-size: 0.875rem; /* text-sm */
+}
+
+.microphone-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px; /* Size of the button area */
+    height: 100px;
+}
+
+.mic-button {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 10; /* Ensure button is above pulse */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mic-button:hover:not(:disabled) {
+    background-color: hsl(var(--primary) / 0.9);
+    transform: scale(1.05);
+}
+
+.mic-button:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.mic-button.recording {
+    background-color: var(--destructive); /* Red when recording */
+    color: var(--destructive-foreground);
+}
+
+.mic-icon {
+    width: 36px; /* Adjust icon size */
+    height: 36px;
+    transition: transform 0.2s ease;
+}
+
+.mic-button.recording .mic-icon {
+    transform: scale(1.1); /* Slightly larger icon when recording */
+}
+
+.mic-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: hsl(var(--primary) / 0.3);
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+.mic-button.recording .mic-pulse {
+    animation: pulse-animation 1.5s infinite ease-out;
+}
+
+@keyframes pulse-animation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.transcription-area {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--secondary);
+    width: 100%;
+    min-height: 50px;
+    text-align: left;
+}
+
+.transcription-label {
+    font-size: 0.75rem; /* text-xs */
+    color: var(--muted-foreground);
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.transcription-text {
+    font-size: 0.875rem; /* text-sm */
+    color: var(--foreground);
+    line-height: 1.4;
+}
+
+.status-message {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    min-height: 1.25rem; /* Ensure space is reserved */
+}
+
+/* Re-use alert styles from home.css */
+#voice-error-alert {
+    max-width: 100%; /* Allow alert to take full width within card */
+    margin-bottom: 0; /* Remove bottom margin if it's the last element */
+}
+
+.hidden {
+    display: none !important;
+}
